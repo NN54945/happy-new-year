@@ -3,41 +3,19 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Admin Management Page</title>
-    <link rel="stylesheet" href="styles.css">
+    <title>Admin Management Panel</title>
 </head>
 <body>
-    <header>
-        <h1>Admin Management</h1>
-    </header>
-    <main>
-        <section>
-            <h2>User Management</h2>
-            <table>
-                <thead>
-                    <tr>
-                        <th>User ID</th>
-                        <th>Name</th>
-                        <th>Email</th>
-                        <th>Actions</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <!-- Dynamic user rows will go here -->
-                </tbody>
-            </table>
-        </section>
-        <section>
-            <h2>Site Settings</h2>
-            <form action="/update-settings" method="POST">
-                <label for="site-name">Site Name:</label>
-                <input type="text" id="site-name" name="site-name" required>
-                <button type="submit">Update</button>
-            </form>
-        </section>
-    </main>
-    <footer>
-        <p>&copy; 2026 Happy New Year. All rights reserved.</p>
-    </footer>
+    <h1>Admin Management Panel</h1>
+    <h2>Photo Upload</h2>
+    <form action="/upload" method="POST" enctype="multipart/form-data">
+        <label for="file">Select image to upload:</label>
+        <input type="file" name="file" id="file" accept="image/*" required>
+        <input type="submit" value="Upload Photo">
+    </form>
+    <h2>Manage Photos</h2>
+    <div id="uploaded-photos">
+        <!-- Dynamically loaded uploaded photos will go here -->
+    </div>
 </body>
 </html>
