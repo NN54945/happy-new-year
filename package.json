@@ -1,0 +1,1 @@
+{"name": "happy-new-year", "version": "1.0.0", "description": "A project to celebrate the new year!", "main": "index.js", "scripts": { "test": "echo 'No tests specified' && exit 0" }, "dependencies": {}, "devDependencies": {}, "author": "NN54945", "license": "ISC"}
