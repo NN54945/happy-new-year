@@ -6,69 +6,52 @@
     <title>Happy New Year Carousel</title>
     <style>
         body { font-family: Arial, sans-serif; }
-        .carousel { position: relative; overflow: hidden; width: 80%; margin: auto; }
-        .slides { display: flex; transition: transform 0.5s ease; }
-        .slide { min-width: 100%; }
-        .like-button { cursor: pointer; }
-        .heart { color: red; display: none; }
-        .fireworks { position: absolute; top: 0; left: 0; width: 100%; height: 100%; pointer-events: none; }
+        .carousel { position: relative; width: 80%; margin: auto; }
+        .slides { display: flex; overflow: hidden; }
+        .slide { min-width: 100%; transition: transform 0.5s ease; }
+        .like-button { cursor: pointer; font-size: 2rem; color: gray; }
+        .liked { color: red; }
+        .fireworks { position: absolute; pointer-events: none; }
     </style>
 </head>
 <body>
 
 <div class="carousel">
     <div class="slides">
-        <div class="slide"><img src="image1.jpg" alt="Image 1"></div>
-        <div class="slide"><img src="image2.jpg" alt="Image 2"></div>
-        <div class="slide"><img src="image3.jpg" alt="Image 3"></div>
+        <div class="slide"><img src="https://via.placeholder.com/800x400?text=Image+1" alt="Image 1"></div>
+        <div class="slide"><img src="https://via.placeholder.com/800x400?text=Image+2" alt="Image 2"></div>
+        <div class="slide"><img src="https://via.placeholder.com/800x400?text=Image+3" alt="Image 3"></div>
     </div>
+    <div class="like-button" id="likeButton">❤️</div>
 </div>
 
-<button class="like-button">❤️ Like (<span class="likes-counter">0</span>)</button>
-<div class="heart">❤️</div>
-<div class="fireworks" id="fireworks"></div>
-
 <script>
-    let currentSlide = 0;
     const slides = document.querySelectorAll('.slide');
-    const totalSlides = slides.length;
-    const likesCounter = document.querySelector('.likes-counter');
-    const heart = document.querySelector('.heart');
-    const fireworksDiv = document.getElementById('fireworks');
+    const likeButton = document.getElementById('likeButton');
+    let currentIndex = 0;
+    setInterval(() => {
+        slides[currentIndex].style.transform = 'translateX(-100%)';
+        currentIndex = (currentIndex + 1) % slides.length;
+        slides[currentIndex].style.transform = 'translateX(0)';
+    }, 3000);
 
-    function showSlide(index) {
-        currentSlide = index % totalSlides;
-        const offset = -currentSlide * 100;
-        document.querySelector('.slides').style.transform = `translateX(${offset}%)`;
-    }
-
-    function nextSlide() {
-        showSlide(currentSlide + 1);
-    }
-
-    setInterval(nextSlide, 3000);
-
-    document.querySelector('.like-button').addEventListener('click', function() {
-        const count = parseInt(likesCounter.textContent);
-        likesCounter.textContent = count + 1;
-        heart.style.display = 'block';
-        setTimeout(() => heart.style.display = 'none', 1000);
-        // Simulate fireworks
-        createFireworks();
+    likeButton.addEventListener('click', () => {
+        likeButton.classList.toggle('liked');
+        if (likeButton.classList.contains('liked')) {
+            alert('Image liked!');
+        } else {
+            alert('Like removed!');
+        }
     });
 
+    // Fireworks effect (pseudo code)
     function createFireworks() {
         const firework = document.createElement('div');
-        firework.style.position = 'absolute';
-        firework.style.width = '100px';
-        firework.style.height = '100px';
-        firework.style.backgroundImage = 'url(fireworks.gif)';
-        firework.style.backgroundSize = 'cover';
-        firework.style.top = Math.random() * 100 + '%';
-        firework.style.left = Math.random() * 100 + '%';
-        fireworksDiv.appendChild(firework);
-        setTimeout(() => firework.remove(), 2000);
+        firework.className = 'fireworks';
+        document.body.appendChild(firework);
+        // Implement fireworks animation here
     }
+    setInterval(createFireworks, 5000);
 </script>
 
 </body>
